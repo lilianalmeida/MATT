@@ -48,7 +48,7 @@ export default function SettingsScreen({navigation}) {
                             paddingTop: 25,
                         }}
                     />
-                    <TouchableOpacity style={styles.settingButton}>
+                    <TouchableOpacity style={styles.settingButton} onPress={() => navigation.navigate('Loading')}>
                         <View>
                             <Text style={styles.settingTitle}>General Settings</Text>
                             <Text style={styles.settingDescription}>Change the general setting on the app</Text>

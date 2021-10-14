@@ -13,7 +13,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements'
 
-import MattLogo from '../assets/logo.png'
+import MattLogo from '../assets/doggo-circle.png'
 
 
 export default function HomeScreen({ navigation }) {
@@ -28,6 +28,7 @@ export default function HomeScreen({ navigation }) {
                     style={styles.linearGradient}
                 >
                     <View style={styles.header}>
+                        <View style={{width:32}}/>
                         <Image style={styles.logoImage} source={MattLogo} />
                         <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
                             <Icon
@@ -97,9 +98,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     logoImage: {
-        height: 40,
-        width: 130,
-        resizeMode: 'stretch'
+        height: 45,
+        width: 40,
+        resizeMode: 'stretch',
+        alignSelf: 'center'
     },
     mainSection: {
         margin: 22,
