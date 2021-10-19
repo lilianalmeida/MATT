@@ -8,70 +8,64 @@ import {
     Touchable,
     TouchableOpacity,
     ScrollView,
-    Linking
+    Linking,
+    Dimensions
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements'
 
-import MattLogo from '../assets/doggo-circle.png'
 
+import MattLogo from '../assets/doggo-circle.png'
+import NewspaperIcon from '../assets/newspaper-icon.png'
+import ChecklistIcon from '../assets/checklist-icon.png'
+import DumbbellIcon from '../assets/dumbbell-icon.png'
+import TeaCupIcon from '../assets/tea-cup-icon.png'
+import CogwheelIcon from '../assets/cogwheel-icon.png'
 
 export default function HomeScreen({ navigation }) {
-
     return (
         <View style={styles.container}>
             <SafeAreaView>
                 <LinearGradient
                     end={{ x: 1, y: 0 }}
                     start={{ x: 0, y: 1 }}
-                    colors={['#71A0F9', '#D774F9']}
+                    colors={['#FA565D', '#FBB35C']}
                     style={styles.linearGradient}
                 >
                     <View style={styles.header}>
-                        <View style={{width:32}}/>
+                        <View style={{ width: 88.7 }} />
                         <Image style={styles.logoImage} source={MattLogo} />
-                        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                            <Icon
-                                name='cog-outline'
-                                type='material-community'
-                                color='#434343'
-                                size={32}
-                            />
+                        <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('Settings')}>
+                            <Text style={styles.settingsText}>Settings</Text>
+                            <Image source={CogwheelIcon}/>
                         </TouchableOpacity>
                     </View>
                     <ScrollView>
                         <View style={styles.mainSection}>
                             <Text style={styles.welcomeText}>Good Evening, Clara!</Text>
-                            {[1, 2].map(x => (
-                                <View key={x}>
-                                    <TouchableOpacity style={styles.touchableSection} onPress={() => Linking.openURL('instagram://user?username=wearehutt')}>
-                                        <View style={styles.contentSection}>
-                                            <Text style={styles.contentText}>Not sure what to read? Here are some recommendations!</Text>
-                                            <View
-                                                style={{
-                                                    borderBottomColor: 'white',
-                                                    borderBottomWidth: 1,
-                                                    paddingVertical: 7,
-                                                }}
-                                            />
-                                            <Text style={styles.contentText2}>30 Books Everyone Should Read At Least Once In Their Lives</Text>
-                                        </View>
+                            <Text style={styles.descriptionText}>What are you up to this morning?</Text>
+                            <View style={styles.suggestionsSection}>
+                                <View style={styles.suggestionsRow}>
+                                    <TouchableOpacity style={styles.suggestion} onPress={() => Linking.openURL('instagram://user?username=wearehutt')}>
+                                        <Image style={styles.suggestionIcon} source={NewspaperIcon} />
+                                        <Text style={styles.suggestionText}>Reading news</Text>
                                     </TouchableOpacity>
-                                    <View style={styles.contentRow}>
-                                        <TouchableOpacity style={[styles.touchableSection, {marginRight: 10}]} onPress={() => Linking.openURL('youtube:')}>
-                                            <View style={styles.contentSection}>
-                                                <Text style={styles.contentText2}>Wind down with some meditation</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={[styles.touchableSection, {marginLeft: 10}]} onPress={() => Linking.openURL('fb:')}>
-
-                                            <View style={styles.contentSection}>
-                                                <Text style={styles.contentText2}>Did you drink enough water today?</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
+                                    <TouchableOpacity style={styles.suggestion}>
+                                        <Image style={styles.suggestionIcon} source={DumbbellIcon} />
+                                        <Text style={styles.suggestionText}>Morning exercise</Text>
+                                    </TouchableOpacity>
                                 </View>
-                            ))}
+                                <View style={styles.suggestionsRow}>
+                                    <TouchableOpacity style={styles.suggestion}>
+                                        <Image style={styles.suggestionIcon} source={TeaCupIcon} />
+                                        <Text style={styles.suggestionText}>Preparing breakfast</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.suggestion}>
+                                        <Image style={styles.suggestionIcon} source={ChecklistIcon} />
+                                        <Text style={styles.suggestionText}>Checking my day</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
                     </ScrollView>
                 </LinearGradient>
@@ -90,50 +84,80 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     header: {
-        height: 68,
+        height: 165,
         backgroundColor: 'white',
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 20
     },
     logoImage: {
-        height: 45,
-        width: 40,
+        height: 98,
+        width: 72,
         resizeMode: 'stretch',
         alignSelf: 'center'
     },
+    settingsButton: {
+        paddingTop: 25,
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    settingsText: {
+        paddingRight: 10,
+        paddingTop: 3,
+        fontSize: 14,
+        color: '#4F3130',
+    },
     mainSection: {
         margin: 22,
+        paddingHorizontal: 30
     },
     welcomeText: {
         color: 'white',
         fontSize: 33,
         fontWeight: '600',
         alignSelf: 'center',
-        paddingBottom: 20
+        paddingTop: 40,
+        paddingBottom: 10
     },
-    touchableSection: {
-        marginVertical: 10,
-        flex:1
-    },
-    contentSection: {
-        height: 149,
-        padding: 20,
-        borderRadius: 22,
-        backgroundColor: 'rgba(64,51,81,0.8)',
-    },
-    contentText: {
+    descriptionText: {
         color: 'white',
+        alignSelf: 'center',
+        fontSize: 18,
     },
-    contentText2: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 17,
-        paddingVertical: 13,
+    suggestionsSection: {
+        paddingTop: 50
     },
-    contentRow: {
+    suggestionsRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    }
+    },
+    suggestion: {
+        backgroundColor: 'white',
+        width: Dimensions.get('window').width / 2 - 75,
+        height: Dimensions.get('window').width / 2 - 75,
+        marginBottom: 37.5,
+        borderRadius: 17,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 15,
+        // iOS shadow
+        shadowColor: '#000',
+        shadowOpacity: 0.25,
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        // Android shadow
+        elevation: 8,
+    },
+    suggestionText: {
+        fontSize: 14,
+        color: '#4F3130',
+        textAlign: 'center'
+    },
+    suggestionIcon: {
+        width: 55,
+        height: 55,
+        marginBottom: 15
+    },
 });
