@@ -5,7 +5,7 @@ import {
     SafeAreaView,
     View,
     Image,
-    Touchable,
+    TouchableWithoutFeedback,
     TouchableOpacity,
     ScrollView,
     Linking,
@@ -34,9 +34,13 @@ export default function HomeScreen({ navigation }) {
     const [opacity, setOpacity] = useState(0);
     const barkingInterval = 400;
 
+    const barkAnimation = () => {
+        setOpacity(1);
+        setTimeout(() => setOpacity(0), barkingInterval);
+    };
+
     useEffect(() => {
-        setTimeout(() => setOpacity(1), barkingInterval);
-        setTimeout(() => setOpacity(0), 2 * barkingInterval);
+        setTimeout(barkAnimation, barkingInterval);
     }, []);
 
     if (!fontsLoaded) {
@@ -64,13 +68,15 @@ export default function HomeScreen({ navigation }) {
                             ]}
                             source={MattBark}
                         />
-                        <Image
-                            style={[
-                                styles.logoImage,
-                                { display: opacity ? "none" : "flex" },
-                            ]}
-                            source={MattLogo}
-                        />
+                        <TouchableWithoutFeedback onPress={barkAnimation}>
+                            <Image
+                                style={[
+                                    styles.logoImage,
+                                    { display: opacity ? "none" : "flex" },
+                                ]}
+                                source={MattLogo}
+                            />
+                        </TouchableWithoutFeedback>
                         <TouchableOpacity
                             style={styles.settingsButton}
                             onPress={() => navigation.navigate("Settings")}
