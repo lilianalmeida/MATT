@@ -14,6 +14,7 @@ import { useFonts } from "expo-font";
 
 import colors from "../config/colors";
 import MattGIF from "../assets/corgi-no-bg.gif";
+import MattLooking from "../assets/doggo-looking.png";
 
 function AnimationScreen({ navigation }) {
     let [fontsLoaded] = useFonts({
@@ -22,16 +23,25 @@ function AnimationScreen({ navigation }) {
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
 
-    const animatedHeight = useRef(new Animated.Value(0)).current;
+    const animation1Value = useRef(new Animated.Value(0)).current;
+    const animation2Value = useRef(new Animated.Value(0)).current;
     const windowHeight = Dimensions.get("window").height;
     const animationDuration = 3000;
 
     useEffect(() => {
-        Animated.timing(animatedHeight, {
-            toValue: 1,
-            duration: animationDuration,
-            useNativeDriver: false,
-        }).start();
+        // navigation.replace("Home");
+        Animated.stagger(2000, [
+            Animated.timing(animation1Value, {
+                toValue: 1,
+                duration: animationDuration,
+                useNativeDriver: true,
+            }),
+            Animated.timing(animation2Value, {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: true,
+            }),
+        ]).start();
     }, []);
 
     if (!fontsLoaded) {
@@ -52,15 +62,15 @@ function AnimationScreen({ navigation }) {
                         {
                             transform: [
                                 {
-                                    scaleY: animatedHeight.interpolate({
+                                    scaleY: animation1Value.interpolate({
                                         inputRange: [0, 1],
                                         outputRange: [1, 0.5],
                                     }),
                                 },
                                 {
-                                    translateY: animatedHeight.interpolate({
+                                    translateY: animation1Value.interpolate({
                                         inputRange: [0, 1],
-                                        outputRange: [0, -windowHeight/2],
+                                        outputRange: [0, - windowHeight / 2],
                                     }),
                                 },
                             ],
@@ -69,8 +79,22 @@ function AnimationScreen({ navigation }) {
                 >
                     <View style={styles.header}></View>
                 </Animated.View>
-                <Image style={styles.corgi} source={MattGIF} />
-                {/* <Image style={styles.corgiSplash} source={MattGIF} /> */}
+                <Animated.Image
+                    style={[
+                        styles.corgi,
+                        {
+                            opacity: animation2Value.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [1, 0],
+                            }),
+                        },
+                    ]}
+                    source={MattGIF}
+                />
+                {/* <Image
+                    style={[styles.corgiSplash, { opacity: 1 - opacity }]}
+                    source={MattLooking}
+                /> */}
                 <Text style={styles.welcomeText}>Good Evening, Clara!</Text>
             </LinearGradient>
         </SafeAreaView>
@@ -88,6 +112,15 @@ const styles = StyleSheet.create({
         width: 191,
         position: "absolute",
         top: "10%",
+        alignSelf: "center",
+        zIndex: 2,
+    },
+    corgiSplash: {
+        height: 200,
+        width: 157,
+        position: "absolute",
+        top: "10%",
+        left: "36%",
         alignSelf: "center",
         zIndex: 2,
     },
@@ -111,6 +144,7 @@ const styles = StyleSheet.create({
     headerWrapper: {
         flex: 1,
         overflow: "hidden",
+        paddingBottom: 30,
         zIndex: 1,
     },
     linearGradient: {
