@@ -27,7 +27,7 @@ export default function SettingsScreen({ navigation }) {
                             color='#4F3130'
                             size={37}
                         />
-                        <Text styles={styles.backText}>Back</Text>
+                        <Text style={styles.backText}>Back</Text>
                     </TouchableOpacity>
                 </View>
                 <ScrollView style={styles.scrollContainer}>
@@ -50,7 +50,7 @@ export default function SettingsScreen({ navigation }) {
                                 <Text style={styles.settingDescription}>Change when you want to perform you habits</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.settingButton}>
+                        <TouchableOpacity style={styles.settingButton} onPress={() => navigation.navigate('EditRoutinesTimes')}>
                             <View>
                                 <Text style={styles.settingTitle}>Edit Routine Times</Text>
                                 <Text style={styles.settingDescription}>Change time for your routine</Text>

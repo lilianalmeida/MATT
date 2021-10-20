@@ -4,6 +4,7 @@ import { createNativeStackNavigator  } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoadingScreen from '../screens/LoadingScreen';
+import EditRoutinesTimesScreen from '../screens/EditRoutinesTimesScreen';
 
 const MainStack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function MainNavigator() {
 		>
 			<MainStack.Screen name='Home' component={HomeScreen} />
 			<MainStack.Screen name='Settings' component={SettingsScreen} />
+			<MainStack.Screen name='EditRoutinesTimes' component={EditRoutinesTimesScreen} />
 			<MainStack.Screen name='Loading' component={LoadingScreen} />
 		</MainStack.Navigator>
 	);
