@@ -134,6 +134,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 20,
+        // iOS shadow
+        shadowColor: colors.black,
+        shadowOpacity: 0.25,
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        // Android shadow
+        elevation: 8,
     },
     logoImage: {
         height: 98,
