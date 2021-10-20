@@ -51,32 +51,34 @@ export default function HomeScreen({ navigation }) {
                 colors={[colors.primary, colors.secondary]}
                 style={styles.linearGradient}
             >
-                <View style={styles.header}>
-                    <View style={{ width: 88.7 }} />
-                    <Image
-                        style={[
-                            styles.logoImage,
-                            styles.barkImage,
-                            {
-                                display: opacity ? "flex" : "none",
-                            },
-                        ]}
-                        source={MattBark}
-                    />
-                    <Image
-                        style={[
-                            styles.logoImage,
-                            { display: opacity ? "none" : "flex"},
-                        ]}
-                        source={MattLogo}
-                    />
-                    <TouchableOpacity
-                        style={styles.settingsButton}
-                        onPress={() => navigation.navigate("Settings")}
-                    >
-                        <Text style={styles.settingsText}>Settings</Text>
-                        <Image source={CogwheelIcon} />
-                    </TouchableOpacity>
+                <View style={styles.headerWrapper}>
+                    <View style={styles.header}>
+                        <View style={{ width: 88.7 }} />
+                        <Image
+                            style={[
+                                styles.logoImage,
+                                styles.barkImage,
+                                {
+                                    display: opacity ? "flex" : "none",
+                                },
+                            ]}
+                            source={MattBark}
+                        />
+                        <Image
+                            style={[
+                                styles.logoImage,
+                                { display: opacity ? "none" : "flex" },
+                            ]}
+                            source={MattLogo}
+                        />
+                        <TouchableOpacity
+                            style={styles.settingsButton}
+                            onPress={() => navigation.navigate("Settings")}
+                        >
+                            <Text style={styles.settingsText}>Settings</Text>
+                            <Image source={CogwheelIcon} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <ScrollView>
                     <View style={styles.mainSection}>
@@ -168,6 +170,10 @@ const styles = StyleSheet.create({
         // Android shadow
         elevation: 8,
     },
+    headerWrapper: {
+        overflow: "hidden",
+        paddingBottom: 10,
+    },
     logoImage: {
         height: 98,
         width: 72,
@@ -196,6 +202,7 @@ const styles = StyleSheet.create({
     },
     mainSection: {
         margin: 22,
+        marginTop: 12,
         paddingHorizontal: 30,
     },
     welcomeText: {
