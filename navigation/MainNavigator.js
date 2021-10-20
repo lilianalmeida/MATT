@@ -12,7 +12,7 @@ export default function MainNavigator() {
     return (
         <MainStack.Navigator
             headerMode="none"
-            initialRouteName="Home"
+            initialRouteName="Animation"
             screenOptions={{
                 cardStyle: { backgroundColor: "#fff" },
                 headerShown: false,
