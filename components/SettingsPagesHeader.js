@@ -8,12 +8,14 @@ import {
 import { Icon } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient';
 
+import colors from "../config/colors";
+
 export default function SettingsPagesHeader({ navigation, title }) {
     return (<View style={styles.header}>
         <LinearGradient
             end={{ x: 0, y: 0 }}
             start={{ x: 0, y: 1 }}
-            colors={['#FA565D', '#FBB35C']}
+            colors={[colors.primary, colors.secondary]}
             style={styles.linearGradient}
         >
             <View style={styles.headerRow}>
@@ -21,7 +23,7 @@ export default function SettingsPagesHeader({ navigation, title }) {
                     <Icon
                         name='chevron-left'
                         type='material-community'
-                        color='#fff'
+                        color={colors.white}
                         size={37}
                     />
                     <Text style={styles.backText}>Back</Text>
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
     header: {
         height: 108,
         // iOS shadow
-        shadowColor: '#000',
+        shadowColor: colors.black,
         shadowOpacity: 0.25,
         shadowOffset: {
             width: 0,
@@ -61,8 +63,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     headerTitle: {
-        fontSize: 26,
-        color: '#fff',
+        fontSize: 34,
+        fontFamily: "Dosis-SemiBold",
+        color: colors.white,
         fontWeight: '600'
     },
     backButton: {
@@ -70,7 +73,8 @@ const styles = StyleSheet.create({
         paddingTop: 2,
     },
     backText: {
-        color: "#fff",
-        fontSize: 14
+        color: colors.white,
+        fontSize: 14,
+        fontFamily: "Nunito-Regular",
     },
 });

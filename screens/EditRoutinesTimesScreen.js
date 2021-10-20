@@ -5,11 +5,18 @@ import {
     View,
     ScrollView
 } from 'react-native';
+import { useFonts } from "expo-font";
 import DateTimePicker from '@react-native-community/datetimepicker'
 
 import SettingsPagesHeader from '../components/SettingsPagesHeader';
+import colors from "../config/colors";
 
 export default function EditRoutinesTimesScreen({ navigation }) {
+    let [fontsLoaded] = useFonts({
+        "Nunito-Regular": require("../assets/fonts/Nunito-Regular.ttf"),
+        "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
+    });
+
     // Create states for each time of the day
     let wakeUpTimeDefault = new Date()
     wakeUpTimeDefault.setHours(7, 0, 0)
@@ -136,7 +143,7 @@ export default function EditRoutinesTimesScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: colors.white
     },
     mainSection: {
         paddingHorizontal: 20,
@@ -149,7 +156,8 @@ const styles = StyleSheet.create({
     },
     timeText: {
         fontSize: 20,
-        color: '#000',
+        fontFamily: "Nunito-Regular",
+        color: colors.black,
         flex: 1,
         alignSelf: "flex-end"
     },
@@ -157,7 +165,7 @@ const styles = StyleSheet.create({
         width: 70
     },
     division: {
-        borderBottomColor: '#C8C9CA',
+        borderBottomColor: colors.mute,
         borderBottomWidth: 1,
         paddingTop: 10
     }
