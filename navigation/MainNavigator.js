@@ -18,8 +18,12 @@ export default function MainNavigator() {
                 headerShown: false,
             }}
         >
-            <MainStack.Screen name="Animation" component={AnimationScreen} />
-            <MainStack.Screen name="Home" component={HomeScreen} />
+            <MainStack.Screen
+                name="Animation"
+                component={AnimationScreen}
+                options={{ animation: "none" }}
+            />
+            <MainStack.Screen name="Home" component={HomeScreen} options={{ animation: "none" }} />
             <MainStack.Screen name="Settings" component={SettingsScreen} />
             <MainStack.Screen name="Loading" component={LoadingScreen} />
         </MainStack.Navigator>

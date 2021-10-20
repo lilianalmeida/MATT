@@ -14,7 +14,6 @@ import { useFonts } from "expo-font";
 
 import colors from "../config/colors";
 import MattGIF from "../assets/corgi-no-bg.gif";
-import MattLooking from "../assets/doggo-looking.png";
 
 function AnimationScreen({ navigation }) {
     let [fontsLoaded] = useFonts({
@@ -23,25 +22,30 @@ function AnimationScreen({ navigation }) {
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
 
-    const animation1Value = useRef(new Animated.Value(0)).current;
-    const animation2Value = useRef(new Animated.Value(0)).current;
+    const animatedHeaderValue = useRef(new Animated.Value(0)).current;
+    const animatedDogValue = useRef(new Animated.Value(0)).current;
     const windowHeight = Dimensions.get("window").height;
-    const animationDuration = 3000;
+    const windowWidth = Dimensions.get("window").width;
 
+    const headerAnimDuration = 3000;
+    const dogAnimDuration = 1500;
+
+    const [opacity, setOpacity] = useState(1);
+
+    // navigation.replace("Home");
     useEffect(() => {
-        // navigation.replace("Home");
-        Animated.stagger(2000, [
-            Animated.timing(animation1Value, {
-                toValue: 1,
-                duration: animationDuration,
+        Animated.stagger(700 ,[
+            Animated.timing(animatedHeaderValue, {
+                toValue: 2,
+                duration: headerAnimDuration,
                 useNativeDriver: true,
             }),
-            Animated.timing(animation2Value, {
+            Animated.timing(animatedDogValue, {
                 toValue: 1,
-                duration: 1000,
+                duration: dogAnimDuration,
                 useNativeDriver: true,
             }),
-        ]).start();
+        ]).start(() => navigation.replace("Home"));
     }, []);
 
     if (!fontsLoaded) {
@@ -62,40 +66,36 @@ function AnimationScreen({ navigation }) {
                         {
                             transform: [
                                 {
-                                    scaleY: animation1Value.interpolate({
-                                        inputRange: [0, 1],
-                                        outputRange: [1, 0.5],
-                                    }),
-                                },
-                                {
-                                    translateY: animation1Value.interpolate({
-                                        inputRange: [0, 1],
-                                        outputRange: [0, - windowHeight / 2],
-                                    }),
+                                    translateY: animatedHeaderValue.interpolate(
+                                        {
+                                            inputRange: [0, 2],
+                                            outputRange: [0, - windowHeight * 0.75 - 19],
+                                        }
+                                    ),
                                 },
                             ],
                         },
                     ]}
                 >
                     <View style={styles.header}></View>
+                    <Text style={styles.welcomeText}>Good Evening, Clara!</Text>
                 </Animated.View>
                 <Animated.Image
                     style={[
                         styles.corgi,
                         {
-                            opacity: animation2Value.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [1, 0],
-                            }),
+                            transform: [
+                                {
+                                    translateX: animatedDogValue.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [0, -windowWidth / 2 - 96],
+                                    }),
+                                },
+                            ],
                         },
                     ]}
                     source={MattGIF}
                 />
-                {/* <Image
-                    style={[styles.corgiSplash, { opacity: 1 - opacity }]}
-                    source={MattLooking}
-                /> */}
-                <Text style={styles.welcomeText}>Good Evening, Clara!</Text>
             </LinearGradient>
         </SafeAreaView>
     );
@@ -143,8 +143,6 @@ const styles = StyleSheet.create({
     },
     headerWrapper: {
         flex: 1,
-        overflow: "hidden",
-        paddingBottom: 30,
         zIndex: 1,
     },
     linearGradient: {
@@ -156,8 +154,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontFamily: "Dosis-SemiBold",
         alignSelf: "center",
-        position: "absolute",
-        bottom: "25%",
+        marginTop: 62,
     },
 });
 
