@@ -86,7 +86,7 @@ export default function HomeScreen({ navigation }) {
                             Good Evening, Clara!
                         </Text>
                         <Text style={styles.descriptionText}>
-                            What are you up to this morning?
+                            What are you up to tonight?
                         </Text>
                         <View style={styles.suggestionsSection}>
                             <View style={styles.suggestionsRow}>
