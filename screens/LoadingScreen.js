@@ -3,13 +3,14 @@ import { StyleSheet, SafeAreaView, View, Image, Text } from "react-native";
 import LoadingDots from "react-native-loading-dots";
 
 import MattGIF from "../assets/corgi-no-bg.gif";
+import colors from "../config/colors";
 
 export default function LoadingScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Image style={styles.gif} source={MattGIF} />
             <LoadingDots
-                colors={["#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10"]}
+                colors={[colors.secondary, colors.secondary, colors.secondary, colors.secondary, colors.secondary]}
                 size={10}
                 dots={5}
                 bounceHeight={10}

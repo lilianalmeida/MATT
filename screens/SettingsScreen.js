@@ -70,7 +70,10 @@ export default function SettingsScreen({ navigation }) {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.settingButton}>
+                    <TouchableOpacity
+                        style={styles.settingButton}
+                        onPress={() => navigation.navigate("EditRoutinesTimes")}
+                    >
                         <View>
                             <Text style={styles.settingTitle}>
                                 Edit Routine Times
