@@ -1,24 +1,19 @@
-import React from 'react';
-import {
-    StyleSheet,
-    SafeAreaView,
-    View,
-    Image,
-    Text,
-} from 'react-native';
-
+import React from "react";
+import { StyleSheet, SafeAreaView, View, Image, Text } from "react-native";
 import LoadingDots from "react-native-loading-dots";
 
+import MattGIF from "../assets/corgi-no-bg.gif";
 
-import MattGIF from '../assets/corgi-no-bg.gif'
-
-
-export default function HomeScreen({ navigation }) {
-
+export default function LoadingScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Image style={styles.gif} source={MattGIF} />
-            <LoadingDots colors={["#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10"]} size={10} dots={5} bounceHeight={10}/>
+            <LoadingDots
+                colors={["#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10", "#f7ae10"]}
+                size={10}
+                dots={5}
+                bounceHeight={10}
+            />
         </View>
     );
 }
@@ -26,13 +21,13 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
     },
     gif: {
         width: 150,
         height: 150,
-        marginBottom: 30
+        marginBottom: 30,
     },
 });
