@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
         paddingTop: 15,
         backgroundColor: colors.white,
-        // borderStyle: 2,
-        elevation: 0
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
     },
     searchInputContainer: {
         height: 36,
-        backgroundColor: '#7676801e'
+        backgroundColor: '#7676801e',
     },
     searchInput: {
         fontSize: 15,

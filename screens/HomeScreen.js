@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Text,
     StyleSheet,
     SafeAreaView,
     View,
     Image,
-    Touchable,
+    TouchableWithoutFeedback,
     TouchableOpacity,
     ScrollView,
     Linking,
@@ -17,6 +17,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
 import MattLogo from "../assets/doggo-circle.png";
+import MattBark from "../assets/doggo-circle-bark.png";
 import NewspaperIcon from "../assets/newspaper-icon.png";
 import ChecklistIcon from "../assets/checklist-icon.png";
 import DumbbellIcon from "../assets/dumbbell-icon.png";
@@ -30,6 +31,17 @@ export default function HomeScreen({ navigation }) {
         "Nunito-Bold": require("../assets/fonts/Nunito-Bold.ttf"),
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
+    const [opacity, setOpacity] = useState(0);
+    const barkingInterval = 400;
+
+    const barkAnimation = () => {
+        setOpacity(1);
+        setTimeout(() => setOpacity(0), barkingInterval);
+    };
+
+    useEffect(() => {
+        setTimeout(barkAnimation, barkingInterval);
+    }, []);
 
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -46,7 +58,25 @@ export default function HomeScreen({ navigation }) {
                 <View style={styles.headerWrapper}>
                     <View style={styles.header}>
                         <View style={{ width: 88.7 }} />
-                        <Image style={styles.logoImage} source={MattLogo} />
+                        <Image
+                            style={[
+                                styles.logoImage,
+                                styles.barkImage,
+                                {
+                                    display: opacity ? "flex" : "none",
+                                },
+                            ]}
+                            source={MattBark}
+                        />
+                        <TouchableWithoutFeedback onPress={barkAnimation}>
+                            <Image
+                                style={[
+                                    styles.logoImage,
+                                    { display: opacity ? "none" : "flex" },
+                                ]}
+                                source={MattLogo}
+                            />
+                        </TouchableWithoutFeedback>
                         <TouchableOpacity
                             style={styles.settingsButton}
                             onPress={() => navigation.navigate("Settings")}
@@ -62,7 +92,7 @@ export default function HomeScreen({ navigation }) {
                             Good Evening, Clara!
                         </Text>
                         <Text style={styles.descriptionText}>
-                            What are you up to this morning?
+                            What are you up to tonight?
                         </Text>
                         <View style={styles.suggestionsSection}>
                             <View style={styles.suggestionsRow}>
@@ -157,6 +187,12 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 30,
         marginBottom: 30,
+    },
+    barkImage: {
+        height: 98,
+        width: 100,
+        left: -9,
+        top: 2,
     },
     settingsButton: {
         paddingTop: 25,
