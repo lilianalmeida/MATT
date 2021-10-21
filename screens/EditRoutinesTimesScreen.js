@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         marginTop: 55
     },
     timeText: {
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: "Nunito-Regular",
         color: colors.black,
         flex: 1,

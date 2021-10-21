@@ -4,6 +4,7 @@ import {
     StyleSheet,
     View,
     ScrollView,
+    TouchableWithoutFeedback
 } from 'react-native';
 import { useFonts } from "expo-font";
 import { SearchBar, CheckBox } from 'react-native-elements';
@@ -68,23 +69,25 @@ export default function EditHabitsScreen({ navigation, route }) {
                 <ScrollView>
                     {searchedHabits.map(habit => (
                         <View key={habit}>
-                            <View style={styles.habit}>
-                                <CheckBox
-                                    center
-                                    title=''
-                                    checkedIcon='circle'
-                                    uncheckedIcon='circle-o'
-                                    checkedColor={colors.primary}
-                                    containerStyle={{ padding: 0 }}
-                                    checked={selectedHabits.indexOf(habit) > -1}
-                                    onPress={() => checkHabit(habit)}
-                                />
-                                <Text style={styles.habitText}>{habit}</Text>
-                            </View>
+                            <TouchableWithoutFeedback
+                                onPress={() => checkHabit(habit)}
+                            >
+                                <View style={styles.habit}>
+                                    <CheckBox
+                                        center
+                                        title=''
+                                        checkedIcon='circle'
+                                        uncheckedIcon='circle-o'
+                                        checkedColor={colors.primary}
+                                        containerStyle={{ padding: 0 }}
+                                        checked={selectedHabits.indexOf(habit) > -1}
+                                    />
+                                    <Text style={styles.habitText}>{habit}</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
                             <View style={styles.division} />
                         </View>
                     ))}
-                    {/* <View style={{ height: 78 }} /> */}
                 </ScrollView>
             </View>
         </View >
