@@ -3,9 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const isString = (str) => str instanceof String || typeof str === "string";
 
 const addHabit = (arr, habit) => {
-    const index = arr.indexOf(habit);
-
-    if (index == -1 || !isString(habit)) return;
+    if (!isString(habit)) return;
 
     arr.push(habit);
 };
