@@ -54,15 +54,45 @@ function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
     );
 }
 
+function HabitMenu({ habits, deleteCallback, dispatchCallback, children }) {
+    return (
+        <View style={styles.timeOfDay}>
+            <View style={styles.timeOfDayRow}>
+                <Text style={styles.timeOfDayText}>{children}</Text>
+                <TouchableOpacity
+                    style={styles.timeOfDayRow}
+                    onPress={() =>
+                        navigation.navigate("AddHabit", {
+                            chosenHabits: habits,
+                        })
+                    }
+                >
+                    <Text style={styles.timeOfDayText}>Add</Text>
+                    <Icon
+                        name="plus"
+                        type="material-community"
+                        color={colors.mute}
+                        size={22}
+                    />
+                </TouchableOpacity>
+            </View>
+            {habits.map((habitKey) => (
+                <HabitItem
+                    key={habitKey}
+                    habitKey={habitKey}
+                    deleteCallback={deleteCallback}
+                    dispatchCallback={dispatchCallback}
+                />
+            ))}
+        </View>
+    );
+}
+
 export default function EditRoutineScreen({ navigation }) {
     let [fontsLoaded] = useFonts({
         "Nunito-Regular": require("../assets/fonts/Nunito-Regular.ttf"),
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
-
-    // const [morningHabits, setMorningHabits] = useState(["Drink Water", "Yoga", "Plan Day"])
-    // const [midDayHabits, setMidDayHabits] = useState(["Read a book", "Meditation", "Listen to podcasts"])
-    // const [eveningHabits, setEveningHabits] = useState(["Cook Lunch", "Read News", "Drink tea"])
 
     // State related variables
     const morningHabits = useSelector(selectMorningHabits);
@@ -75,90 +105,27 @@ export default function EditRoutineScreen({ navigation }) {
             <SettingsPagesHeader navigation={navigation} title="Edit Routine" />
             <ScrollView>
                 <View style={styles.mainSection}>
-                    <View style={styles.timeOfDay}>
-                        <View style={styles.timeOfDayRow}>
-                            <Text style={styles.timeOfDayText}>MORNINGS</Text>
-                            <TouchableOpacity
-                                style={styles.timeOfDayRow}
-                                onPress={() =>
-                                    navigation.navigate("AddHabit", {
-                                        chosenHabits: morningHabits,
-                                    })
-                                }
-                            >
-                                <Text style={styles.timeOfDayText}>Add</Text>
-                                <Icon
-                                    name="plus"
-                                    type="material-community"
-                                    color={colors.mute}
-                                    size={22}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        {morningHabits.map((habitKey) => (
-                            <HabitItem
-                                habitKey={habitKey}
-                                deleteCallback={removeMorningHabit}
-                                dispatchCallback={dispatch}
-                            />
-                        ))}
-                    </View>
-                    <View style={styles.timeOfDay}>
-                        <View style={styles.timeOfDayRow}>
-                            <Text style={styles.timeOfDayText}>MID DAYS</Text>
-                            <TouchableOpacity
-                                style={styles.timeOfDayRow}
-                                onPress={() =>
-                                    navigation.navigate("AddHabit", {
-                                        chosenHabits: afternoonHabits,
-                                    })
-                                }
-                            >
-                                <Text style={styles.timeOfDayText}>Add</Text>
-                                <Icon
-                                    name="plus"
-                                    type="material-community"
-                                    color={colors.mute}
-                                    size={22}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        {afternoonHabits.map((habitKey) => (
-                            <HabitItem
-                                habitKey={habitKey}
-                                deleteCallback={removeAfternoonHabit}
-                                dispatchCallback={dispatch}
-                            />
-                        ))}
-                    </View>
-                    <View style={styles.timeOfDay}>
-                        <View style={styles.timeOfDayRow}>
-                            <Text style={styles.timeOfDayText}>EVENINGS</Text>
-                            <TouchableOpacity
-                                style={styles.timeOfDayRow}
-                                onPress={() =>
-                                    navigation.navigate("AddHabit", {
-                                        chosenHabits: eveningHabits,
-                                    })
-                                }
-                            >
-                                <Text style={styles.timeOfDayText}>Add</Text>
-                                <Icon
-                                    name="plus"
-                                    type="material-community"
-                                    color={colors.mute}
-                                    size={22}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        {eveningHabits.map((habitKey) => (
-                            <HabitItem
-                                habitKey={habitKey}
-                                deleteCallback={removeEveningHabit}
-                                dispatchCallback={dispatch}
-                            />
-                        ))}
-                    </View>
+                    <HabitMenu
+                        habits={morningHabits}
+                        deleteCallback={removeMorningHabit}
+                        dispatchCallback={dispatch}
+                    >
+                        Morning
+                    </HabitMenu>
+                    <HabitMenu
+                        habits={afternoonHabits}
+                        deleteCallback={removeAfternoonHabit}
+                        dispatchCallback={dispatch}
+                    >
+                        Afternoon
+                    </HabitMenu>
+                    <HabitMenu
+                        habits={eveningHabits}
+                        deleteCallback={removeEveningHabit}
+                        dispatchCallback={dispatch}
+                    >
+                        Evening
+                    </HabitMenu>
                     <View style={styles.bottomSection}>
                         <Text style={styles.bottomText}>
                             Swipe left to delete a habit
@@ -200,7 +167,7 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
     timeOfDayText: {
-        fontSize: 13,
+        fontSize: 14,
         fontFamily: "Nunito-Regular",
         color: colors.mute,
     },
