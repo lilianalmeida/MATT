@@ -25,3 +25,15 @@ At the end of the day, it might just feel like time has slipped away, but many o
 ## Run app
 
 - Run `expo start` or `npm start` to start Expo
+
+## Remaining Tasks
+
+- [ ] Decide if it's better to join the page of editing routine and habits
+- [ ] Decide what to do with General Settings and Privacy Policy (maybe just an About Us screen)
+- [ ] Maybe change some text sizes
+- [ ] Redirect homepage buttons to somewhere?
+- [ ] Keep the routine and habits informations somewhere (storage, file, database, ...)
+- [ ] Change the informaion showed considering the time of the day
+- [ ] Make video
+- [ ] Finish Portfolio page
+- [ ] Widget (low priority)
