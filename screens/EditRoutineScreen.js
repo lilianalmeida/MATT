@@ -19,11 +19,8 @@ import {
     selectAfternoonHabits,
     selectEveningHabits,
     selectMorningHabits,
-    addMorningHabit,
     removeMorningHabit,
-    addAfternoonHabit,
     removeAfternoonHabit,
-    addEveningHabit,
     removeEveningHabit,
 } from "../redux/habits";
 import allHabits from "../config/data";
@@ -54,7 +51,7 @@ function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
     );
 }
 
-function HabitMenu({ habits, deleteCallback, dispatchCallback, children }) {
+function HabitMenu({ habits, deleteCallback, dispatchCallback, navigation, children }) {
     return (
         <View style={styles.timeOfDay}>
             <View style={styles.timeOfDayRow}>
@@ -109,6 +106,7 @@ export default function EditRoutineScreen({ navigation }) {
                         habits={morningHabits}
                         deleteCallback={removeMorningHabit}
                         dispatchCallback={dispatch}
+                        navigation={navigation}
                     >
                         Morning
                     </HabitMenu>
@@ -116,6 +114,7 @@ export default function EditRoutineScreen({ navigation }) {
                         habits={afternoonHabits}
                         deleteCallback={removeAfternoonHabit}
                         dispatchCallback={dispatch}
+                        navigation={navigation}
                     >
                         Afternoon
                     </HabitMenu>
@@ -123,6 +122,7 @@ export default function EditRoutineScreen({ navigation }) {
                         habits={eveningHabits}
                         deleteCallback={removeEveningHabit}
                         dispatchCallback={dispatch}
+                        navigation={navigation}
                     >
                         Evening
                     </HabitMenu>
