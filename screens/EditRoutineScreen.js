@@ -28,8 +28,17 @@ import {
 } from "../redux/habits";
 import allHabits from "../config/data";
 
-function HabitItem({ habitKey, deleteCallback }) {
+function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
     const habitDescription = allHabits[habitKey].description;
+
+    const leftAction = (habitKey, deleteCallback) => (
+        <TouchableOpacity
+            style={styles.deleteAction}
+            onPress={() => dispatchCallback(deleteCallback(habitKey))}
+        >
+            <Text style={styles.deleteText}>Delete</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <View key={habitKey}>
@@ -61,22 +70,6 @@ export default function EditRoutineScreen({ navigation }) {
     const eveningHabits = useSelector(selectEveningHabits);
     const dispatch = useDispatch();
 
-    const deleteHabit = (habit, callback) => {
-        let habitsCopy = timeOfDayHabits;
-        let habitIndex = habitsCopy.indexOf(habit);
-        habitsCopy.splice(habitIndex, 1);
-        setTimeoDayHabits([...habitsCopy]);
-    };
-
-    const leftAction = (habitKey, deleteCallback) => (
-        <TouchableOpacity
-            style={styles.deleteAction}
-            onPress={() => dispatch(deleteCallback(habitKey))}
-        >
-            <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
-    );
-
     return (
         <View style={styles.container}>
             <SettingsPagesHeader navigation={navigation} title="Edit Routine" />
@@ -102,30 +95,13 @@ export default function EditRoutineScreen({ navigation }) {
                                 />
                             </TouchableOpacity>
                         </View>
-                        {morningHabits.map((habitKey) => {
-                            const habitDescription =
-                                allHabits[habitKey].description;
-
-                            return (
-                                <View key={habitKey}>
-                                    <Swipeable
-                                        renderRightActions={() =>
-                                            leftAction(
-                                                habitKey,
-                                                removeMorningHabit
-                                            )
-                                        }
-                                    >
-                                        <View style={styles.habit}>
-                                            <Text style={styles.habitText}>
-                                                {habitDescription}
-                                            </Text>
-                                        </View>
-                                    </Swipeable>
-                                    <View style={styles.division} />
-                                </View>
-                            );
-                        })}
+                        {morningHabits.map((habitKey) => (
+                            <HabitItem
+                                habitKey={habitKey}
+                                deleteCallback={removeMorningHabit}
+                                dispatchCallback={dispatch}
+                            />
+                        ))}
                     </View>
                     <View style={styles.timeOfDay}>
                         <View style={styles.timeOfDayRow}>
@@ -147,29 +123,13 @@ export default function EditRoutineScreen({ navigation }) {
                                 />
                             </TouchableOpacity>
                         </View>
-                        {afternoonHabits.map((habitKey) => {
-                            const habitDescription =
-                                allHabits[habitKey].description;
-                            return (
-                                <View key={habitKey}>
-                                    <Swipeable
-                                        renderRightActions={() =>
-                                            leftAction(
-                                                habitKey,
-                                                removeAfternoonHabit
-                                            )
-                                        }
-                                    >
-                                        <View style={styles.habit}>
-                                            <Text style={styles.habitText}>
-                                                {habitDescription}
-                                            </Text>
-                                        </View>
-                                    </Swipeable>
-                                    <View style={styles.division} />
-                                </View>
-                            );
-                        })}
+                        {afternoonHabits.map((habitKey) => (
+                            <HabitItem
+                                habitKey={habitKey}
+                                deleteCallback={removeAfternoonHabit}
+                                dispatchCallback={dispatch}
+                            />
+                        ))}
                     </View>
                     <View style={styles.timeOfDay}>
                         <View style={styles.timeOfDayRow}>
@@ -191,29 +151,13 @@ export default function EditRoutineScreen({ navigation }) {
                                 />
                             </TouchableOpacity>
                         </View>
-                        {eveningHabits.map((habitKey) => {
-                            const habitDescription =
-                                allHabits[habitKey].description;
-                            return (
-                                <View key={habitKey}>
-                                    <Swipeable
-                                        renderRightActions={() =>
-                                            leftAction(
-                                                habitKey,
-                                                removeEveningHabit
-                                            )
-                                        }
-                                    >
-                                        <View style={styles.habit}>
-                                            <Text style={styles.habitText}>
-                                                {habitDescription}
-                                            </Text>
-                                        </View>
-                                    </Swipeable>
-                                    <View style={styles.division} />
-                                </View>
-                            );
-                        })}
+                        {eveningHabits.map((habitKey) => (
+                            <HabitItem
+                                habitKey={habitKey}
+                                deleteCallback={removeEveningHabit}
+                                dispatchCallback={dispatch}
+                            />
+                        ))}
                     </View>
                     <View style={styles.bottomSection}>
                         <Text style={styles.bottomText}>
