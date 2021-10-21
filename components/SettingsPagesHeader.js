@@ -10,7 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import colors from "../config/colors";
 
-export default function SettingsPagesHeader({ navigation, title }) {
+export default function SettingsPagesHeader({ navigation, title, addHabit = false, chosenHabits = [] }) {
     return (<View style={styles.header}>
         <LinearGradient
             end={{ x: 0, y: 0 }}
@@ -19,17 +19,27 @@ export default function SettingsPagesHeader({ navigation, title }) {
             style={styles.linearGradient}
         >
             <View style={styles.headerRow}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
                     <Icon
                         name='chevron-left'
                         type='material-community'
                         color={colors.white}
                         size={37}
                     />
-                    <Text style={styles.backText}>Back</Text>
+                    <Text style={styles.buttonText}>Back</Text>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>{title}</Text>
-                <View style={{ width: 35.7 }} />
+                {addHabit ? <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddHabit', { chosenHabits: chosenHabits })}>
+                    <Icon
+                        name='plus'
+                        type='material-community'
+                        color={colors.white}
+                        size={37}
+                    />
+                    <Text style={styles.buttonText}>Add</Text>
+                </TouchableOpacity> :
+                    <View style={{ width: 35.7 }} />
+                }
             </View>
         </LinearGradient>
     </View>)
@@ -68,11 +78,12 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '600'
     },
-    backButton: {
+    button: {
         width: 35,
         paddingTop: 2,
+        alignItems: 'center'
     },
-    backText: {
+    buttonText: {
         color: colors.white,
         fontSize: 14,
         fontFamily: "Nunito-Regular",

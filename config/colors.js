@@ -5,4 +5,5 @@ export default {
     mute: "#979797",
     white: "#fff",
     black: "#000",
+    red: "#FF3131"
 };
