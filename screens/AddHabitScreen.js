@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     },
     searchInputContainer: {
         height: 36,
-        backgroundColor: "#7676801e",
+        backgroundColor: colors.transpMute,
     },
     searchInput: {
         fontSize: 15,

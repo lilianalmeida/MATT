@@ -1,34 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const hourRegex = new RegExp(/^([01]?\d|2[0-3]):([0-5]\d)$/);
+let wakeUpTime = new Date();
+let lunchTime = new Date();
+lunchTime.setHours(lunchTime.getHours() + 1);
+let dinerTime = new Date();
+dinerTime.setHours(dinerTime.getHours() + 2);
+let bedTime = new Date();
+bedTime.setHours(bedTime.getHours() + 3);
 
 export const slice = createSlice({
     name: "times",
     initialState: {
-        wakeUp: "07:00",
-        lunch: "12:00",
-        diner: "19:00",
-        bedTime: "00:00",
+        wakeUp: wakeUpTime.getTime(),
+        lunch: lunchTime.getTime(),
+        diner: dinerTime.getTime(),
+        bedTime: bedTime.getTime(),
     },
     reducers: {
         setWakeUp: (state, action) => {
-            if (!hourRegex.test(action.payload)) return;
-
             state.wakeUp = action.payload;
         },
         setLunch: (state, action) => {
-            if (!hourRegex.test(action.payload)) return;
-
             state.lunch = action.payload;
         },
         setDiner: (state, action) => {
-            if (!hourRegex.test(action.payload)) return;
-
             state.diner = action.payload;
         },
         setBedTime: (state, action) => {
-            if (!hourRegex.test(action.payload)) return;
-
             state.bedTime = action.payload;
         },
     },
