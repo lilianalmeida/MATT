@@ -25,13 +25,13 @@ import {
 } from "../redux/habits";
 import allHabits from "../config/data";
 
-function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
+function HabitItem({ habitKey, deleteAction, dispatchCallback }) {
     const habitDescription = allHabits[habitKey].description;
 
-    const leftAction = (habitKey, deleteCallback) => (
+    const handleSwipe = () => (
         <TouchableOpacity
             style={styles.deleteAction}
-            onPress={() => dispatchCallback(deleteCallback(habitKey))}
+            onPress={() => dispatchCallback(deleteAction(habitKey))}
         >
             <Text style={styles.deleteText}>Delete</Text>
         </TouchableOpacity>
@@ -39,9 +39,7 @@ function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
 
     return (
         <View key={habitKey}>
-            <Swipeable
-                renderRightActions={() => leftAction(habitKey, deleteCallback)}
-            >
+            <Swipeable renderRightActions={handleSwipe}>
                 <View style={styles.habit}>
                     <Text style={styles.habitText}>{habitDescription}</Text>
                 </View>
@@ -51,7 +49,32 @@ function HabitItem({ habitKey, deleteCallback, dispatchCallback }) {
     );
 }
 
-function HabitMenu({ habits, deleteCallback, dispatchCallback, navigation, children }) {
+function HabitMenu({ type, navigation, children }) {
+    let habits, deleteAction;
+    const dispatch = useDispatch();
+
+    switch (type) {
+        case "morning":
+            habits = useSelector(selectMorningHabits);
+            deleteAction = removeMorningHabit;
+            break;
+
+        case "afternoon":
+            habits = useSelector(selectAfternoonHabits);
+            deleteAction = removeAfternoonHabit;
+            break;
+
+        case "evening":
+            habits = useSelector(selectEveningHabits);
+            deleteAction = removeEveningHabit;
+            break;
+
+        default:
+            habits = useSelector(selectMorningHabits);
+            deleteAction = removeMorningHabit;
+            break;
+    }
+
     return (
         <View style={styles.timeOfDay}>
             <View style={styles.timeOfDayRow}>
@@ -60,7 +83,7 @@ function HabitMenu({ habits, deleteCallback, dispatchCallback, navigation, child
                     style={styles.timeOfDayRow}
                     onPress={() =>
                         navigation.navigate("AddHabit", {
-                            chosenHabits: habits,
+                            type: type,
                         })
                     }
                 >
@@ -77,8 +100,8 @@ function HabitMenu({ habits, deleteCallback, dispatchCallback, navigation, child
                 <HabitItem
                     key={habitKey}
                     habitKey={habitKey}
-                    deleteCallback={deleteCallback}
-                    dispatchCallback={dispatchCallback}
+                    deleteAction={deleteAction}
+                    dispatchCallback={dispatch}
                 />
             ))}
         </View>
@@ -91,39 +114,18 @@ export default function EditRoutineScreen({ navigation }) {
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
 
-    // State related variables
-    const morningHabits = useSelector(selectMorningHabits);
-    const afternoonHabits = useSelector(selectAfternoonHabits);
-    const eveningHabits = useSelector(selectEveningHabits);
-    const dispatch = useDispatch();
-
     return (
         <View style={styles.container}>
             <SettingsPagesHeader navigation={navigation} title="Edit Routine" />
             <ScrollView>
                 <View style={styles.mainSection}>
-                    <HabitMenu
-                        habits={morningHabits}
-                        deleteCallback={removeMorningHabit}
-                        dispatchCallback={dispatch}
-                        navigation={navigation}
-                    >
+                    <HabitMenu type={"morning"} navigation={navigation}>
                         Morning
                     </HabitMenu>
-                    <HabitMenu
-                        habits={afternoonHabits}
-                        deleteCallback={removeAfternoonHabit}
-                        dispatchCallback={dispatch}
-                        navigation={navigation}
-                    >
+                    <HabitMenu type={"afternoon"} navigation={navigation}>
                         Afternoon
                     </HabitMenu>
-                    <HabitMenu
-                        habits={eveningHabits}
-                        deleteCallback={removeEveningHabit}
-                        dispatchCallback={dispatch}
-                        navigation={navigation}
-                    >
+                    <HabitMenu type={"evening"} navigation={navigation}>
                         Evening
                     </HabitMenu>
                     <View style={styles.bottomSection}>
