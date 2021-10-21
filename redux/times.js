@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const hourRegex = new RegExp("^(([0-1]?[0-9])|(2[0-3])):[0-5][0-9]&");
+const hourRegex = new RegExp(/^([01]?\d|2[0-3]):([0-5]\d)$/);
 
 export const slice = createSlice({
     name: "times",
