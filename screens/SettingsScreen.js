@@ -41,7 +41,7 @@ export default function SettingsScreen({ navigation }) {
                 <View style={styles.mainSection}>
                     <TouchableOpacity
                         style={styles.settingButton}
-                        onPress={() => navigation.navigate("Loading")}
+                        onPress={() => navigation.navigate("GeneralSettings")}
                     >
                         <View>
                             <Text style={styles.settingTitle}>
@@ -49,17 +49,6 @@ export default function SettingsScreen({ navigation }) {
                             </Text>
                             <Text style={styles.settingDescription}>
                                 Change the general setting on the app
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.settingButton}
-                        onPress={() => navigation.navigate("EditHabits")}
-                    >
-                        <View>
-                            <Text style={styles.settingTitle}>Edit Habits</Text>
-                            <Text style={styles.settingDescription}>
-                                Add, view and remove your habits
                             </Text>
                         </View>
                     </TouchableOpacity>

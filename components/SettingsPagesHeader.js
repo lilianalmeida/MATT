@@ -10,7 +10,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import colors from "../config/colors";
 
-export default function SettingsPagesHeader({ navigation, title, addHabit = false, chosenHabits = [] }) {
+export default function SettingsPagesHeader({ navigation, title }) {
     return (<View style={styles.header}>
         <LinearGradient
             end={{ x: 0, y: 0 }}
@@ -29,17 +29,7 @@ export default function SettingsPagesHeader({ navigation, title, addHabit = fals
                     <Text style={styles.buttonText}>Back</Text>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>{title}</Text>
-                {addHabit ? <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddHabit', { chosenHabits: chosenHabits })}>
-                    <Icon
-                        name='plus'
-                        type='material-community'
-                        color={colors.white}
-                        size={37}
-                    />
-                    <Text style={styles.buttonText}>Add</Text>
-                </TouchableOpacity> :
-                    <View style={{ width: 35.7 }} />
-                }
+                <View style={{ width: 35.7 }} />
             </View>
         </LinearGradient>
     </View>)

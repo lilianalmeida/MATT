@@ -81,6 +81,7 @@ export default function EditHabitsScreen({ navigation, route }) {
                                         checkedColor={colors.primary}
                                         containerStyle={{ padding: 0 }}
                                         checked={selectedHabits.indexOf(habit) > -1}
+                                        onPress={() => checkHabit(habit)}
                                     />
                                     <Text style={styles.habitText}>{habit}</Text>
                                 </View>

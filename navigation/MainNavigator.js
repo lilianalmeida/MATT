@@ -3,11 +3,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import LoadingScreen from "../screens/LoadingScreen";
+import GeneralSettingsScreen from "../screens/GeneralSettingsScreen";
 import AnimationScreen from "../screens/AnimationScreen";
 import EditRoutinesTimesScreen from "../screens/EditRoutinesTimesScreen";
 import EditRoutineScreen from "../screens/EditRoutineScreen";
-import EditHabitsScreen from "../screens/EditHabitsScreen";
 import AddHabitScreen from '../screens/AddHabitScreen';
 import colors from "../config/colors";
 
@@ -39,9 +38,8 @@ export default function MainNavigator() {
                 component={EditRoutinesTimesScreen}
             />
             <MainStack.Screen name="EditRoutine" component={EditRoutineScreen} />
-            <MainStack.Screen name="EditHabits" component={EditHabitsScreen} />
             <MainStack.Screen name="AddHabit" component={AddHabitScreen} />
-            <MainStack.Screen name="Loading" component={LoadingScreen} />
+            <MainStack.Screen name="GeneralSettings" component={GeneralSettingsScreen} />
         </MainStack.Navigator>
     );
 }
