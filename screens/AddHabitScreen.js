@@ -52,26 +52,23 @@ export default function AddHabitsScreen({ navigation, route }) {
             break;
     }
 
-    useEffect(() => {
-        // Get the description list to present to the user
-        for (const key in allHabitsTemp) {
-            const { description } = allHabitsTemp[key];
-            habitsList.push({ habitKey: key, habitDescription: description });
-        }
-    }, []);
+    for (const key in allHabitsTemp) {
+        const { description } = allHabitsTemp[key];
+        habitsList.push({ habitKey: key, habitDescription: description });
+    }
 
     let [fontsLoaded] = useFonts({
         "Nunito-Regular": require("../assets/fonts/Nunito-Regular.ttf"),
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
-    
+
     const [searchedHabits, setSearchedHabits] = useState(habitsList);
     const [searchText, setSearchText] = useState("");
 
     const searchFilterFunction = (input) => {
         setSearchText(input);
 
-        if (input == "") {
+        if (input === "") {
             setSearchedHabits(habitsList);
             return;
         }
