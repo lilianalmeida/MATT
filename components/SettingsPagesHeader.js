@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     headerTitle: {
-        fontSize: 34,
+        fontSize: 33,
         fontFamily: "Dosis-SemiBold",
         color: colors.white,
         fontWeight: '600'

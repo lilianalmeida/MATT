@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+    Text,
+    StyleSheet,
+    View,
+    ScrollView,
+    TouchableWithoutFeedback,
+} from "react-native";
 import { useFonts } from "expo-font";
 import { SearchBar, CheckBox } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     selectAfternoonHabits,
     selectEveningHabits,
@@ -18,7 +25,6 @@ import {
 import SettingsPagesHeader from "../components/SettingsPagesHeader";
 import colors from "../config/colors";
 import allHabitsTemp from "../config/data";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function AddHabitsScreen({ navigation, route }) {
     const { type } = route.params;
@@ -121,6 +127,7 @@ export default function AddHabitsScreen({ navigation, route }) {
                                         uncheckedIcon="circle-o"
                                         checkedColor={colors.primary}
                                         containerStyle={{ padding: 0 }}
+                                        onPress={() => checkHabit(habitKey)}
                                         checked={habits.indexOf(habitKey) > -1}
                                     />
 
@@ -128,8 +135,8 @@ export default function AddHabitsScreen({ navigation, route }) {
                                         {habitDescription}
                                     </Text>
                                 </View>
-                                <View style={styles.division} />
                             </TouchableWithoutFeedback>
+                            <View style={styles.division} />
                         </View>
                     ))}
                 </ScrollView>

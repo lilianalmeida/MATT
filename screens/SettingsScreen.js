@@ -69,7 +69,7 @@ export default function SettingsScreen({ navigation }) {
                     >
                         <View>
                             <Text style={styles.settingTitle}>
-                                Edit Routines
+                                Edit Routine
                             </Text>
                             <Text style={styles.settingDescription}>
                                 Change when you want to perform you habits
@@ -92,11 +92,11 @@ export default function SettingsScreen({ navigation }) {
                     <TouchableOpacity style={styles.settingButton}>
                         <View>
                             <Text style={styles.settingTitle}>
-                                Privacy Policy
+                                About Us
                             </Text>
-                            <Text style={styles.settingDescription}>
-                                Read our privacy policy
-                            </Text>
+                            {/* <Text style={styles.settingDescription}>
+                                Read a little about us
+                            </Text> */}
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         paddingBottom: 1,
     },
     settingDescription: {
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: "Nunito-Regular",
         color: colors.mute,
         paddingTop: 1,
