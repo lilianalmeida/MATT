@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import timesReducer from "./times";
 import habitsReducer from "./habits";
+import settingsReducer from "./settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 let store;
@@ -13,6 +14,7 @@ export const loadStore = async () => {
             reducer: {
                 times: timesReducer,
                 habits: habitsReducer,
+                settings: settingsReducer,
             },
         });
     } else {
@@ -21,6 +23,7 @@ export const loadStore = async () => {
             reducer: {
                 times: timesReducer,
                 habits: habitsReducer,
+                settings: settingsReducer,
             },
         });
     }

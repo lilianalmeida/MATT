@@ -11,6 +11,16 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { useSelector } from "react-redux";
+
+import {
+    selectName,
+} from "../redux/settings";
+import {
+    selectLunch,
+    selectWakeUp,
+    selectDiner,
+} from "../redux/times";
 
 import colors from "../config/colors";
 import MattGIF from "../assets/corgi-no-bg.gif";
@@ -22,6 +32,8 @@ function AnimationScreen({ navigation }) {
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
 
+    let name = useSelector(selectName);
+
     const animatedHeaderValue = useRef(new Animated.Value(0)).current;
     const animatedDogValue = useRef(new Animated.Value(0)).current;
     const windowHeight = Dimensions.get("window").height;
@@ -31,10 +43,30 @@ function AnimationScreen({ navigation }) {
     const dogAnimDuration = 1500;
 
     const [opacity, setOpacity] = useState(1);
+    const [welcomePhrase, setWelcomePhrase] = useState("")
 
-    // navigation.replace("Home");
+    let wakeUpDate = new Date(useSelector(selectWakeUp));
+    let lunchDate = new Date(useSelector(selectLunch));
+    let dinnerDate = new Date(useSelector(selectDiner));
+    let wakeUpTime = wakeUpDate.getHours() + ":" + wakeUpDate.getMinutes();
+    let lunchTime = lunchDate.getHours() + ":" + lunchDate.getMinutes();
+    let dinnerTime = dinnerDate.getHours() + ":" + dinnerDate.getMinutes();
+
+    const setDataAccordingToTime = () => {
+        let today = new Date();
+        let timeNow = today.getHours() + ":" + today.getMinutes();
+
+        if (timeNow >= wakeUpTime && timeNow < lunchTime) {
+            setWelcomePhrase("Good Morning")
+        } else if (timeNow >= lunchTime && timeNow < dinnerTime) {
+            setWelcomePhrase("Good Afternoon")
+        } else {
+            setWelcomePhrase("Good Evening")
+        }
+    }
+
     useEffect(() => {
-        Animated.stagger(700 ,[
+        Animated.stagger(700, [
             Animated.timing(animatedHeaderValue, {
                 toValue: 2,
                 duration: headerAnimDuration,
@@ -46,6 +78,7 @@ function AnimationScreen({ navigation }) {
                 useNativeDriver: true,
             }),
         ]).start(() => navigation.replace("Home"));
+        setDataAccordingToTime();
     }, []);
 
     if (!fontsLoaded) {
@@ -78,7 +111,7 @@ function AnimationScreen({ navigation }) {
                     ]}
                 >
                     <View style={styles.header}></View>
-                    <Text style={styles.welcomeText}>Good Evening, Clara!</Text>
+                    <Text style={styles.welcomeText}>Good Evening, {name}!</Text>
                 </Animated.View>
                 <Animated.Image
                     style={[

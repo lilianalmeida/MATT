@@ -15,7 +15,16 @@ import { Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { useSelector } from "react-redux";
 
+import {
+    selectName,
+} from "../redux/settings";
+import {
+    selectLunch,
+    selectWakeUp,
+    selectDiner,
+} from "../redux/times";
 import MattLogo from "../assets/doggo-circle.png";
 import MattBark from "../assets/doggo-circle-bark.png";
 import NewspaperIcon from "../assets/newspaper-icon.png";
@@ -33,14 +42,41 @@ export default function HomeScreen({ navigation }) {
     });
     const [opacity, setOpacity] = useState(0);
     const barkingInterval = 400;
+    const [welcomePhrase, setWelcomePhrase] = useState("")
+    const [questionPhrase, setQuestionPhrase] = useState("")
+
+    let name = useSelector(selectName);
+    let wakeUpDate = new Date(useSelector(selectWakeUp));
+    let lunchDate = new Date(useSelector(selectLunch));
+    let dinnerDate = new Date(useSelector(selectDiner));
+    let wakeUpTime = wakeUpDate.getHours() + ":" + wakeUpDate.getMinutes();
+    let lunchTime = lunchDate.getHours() + ":" + lunchDate.getMinutes();
+    let dinnerTime = dinnerDate.getHours() + ":" + dinnerDate.getMinutes();
 
     const barkAnimation = () => {
         setOpacity(1);
         setTimeout(() => setOpacity(0), barkingInterval);
     };
 
+    const setDataAccordingToTime = () => {
+        let today = new Date();
+        let timeNow = today.getHours() + ":" + today.getMinutes();
+
+        if (timeNow >= wakeUpTime && timeNow < lunchTime) {
+            setWelcomePhrase("Good Morning")
+            setQuestionPhrase("this morning")
+        } else if (timeNow >= lunchTime && timeNow < dinnerTime) {
+            setWelcomePhrase("Good Afternoon")
+            setQuestionPhrase("this afternoon")
+        } else {
+            setWelcomePhrase("Good Evening")
+            setQuestionPhrase("tonight")
+        }
+    }
+
     useEffect(() => {
         setTimeout(barkAnimation, barkingInterval);
+        setDataAccordingToTime();
     }, []);
 
     if (!fontsLoaded) {
@@ -89,10 +125,10 @@ export default function HomeScreen({ navigation }) {
                 <ScrollView>
                     <View style={styles.mainSection}>
                         <Text style={styles.welcomeText}>
-                            Good Evening, Clara!
+                            {welcomePhrase}, {name}!
                         </Text>
                         <Text style={styles.descriptionText}>
-                            What are you up to tonight?
+                            What are you up to {questionPhrase}?
                         </Text>
                         <View style={styles.suggestionsSection}>
                             <View style={styles.suggestionsRow}>

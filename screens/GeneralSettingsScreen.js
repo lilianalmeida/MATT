@@ -9,7 +9,16 @@ import {
 import { useFonts } from "expo-font";
 import RNPickerSelect from 'react-native-picker-select';
 import { Icon } from 'react-native-elements'
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+    selectName,
+    selectGender,
+    selectAge,
+    setName,
+    setGender,
+    setAge,
+} from "../redux/settings";
 import SettingsPagesHeader from '../components/SettingsPagesHeader';
 import colors from "../config/colors";
 
@@ -19,8 +28,14 @@ export default function GeneralSettingsScreen({ navigation }) {
         "Dosis-SemiBold": require("../assets/fonts/Dosis-SemiBold.ttf"),
     });
 
-    const [name, setName] = useState("Friend")
-    const [age, setAge] = useState("18")
+    let name = useSelector(selectName);
+    let age = useSelector(selectAge);
+    let gender = useSelector(selectGender);
+    const dispatch = useDispatch();
+
+    const setSettings = (setAction, newValue) => {
+        dispatch(setAction(newValue))
+    }
 
     return (
         <View style={styles.container}>
@@ -33,7 +48,7 @@ export default function GeneralSettingsScreen({ navigation }) {
                         <TextInput
                             style={styles.input}
                             placeholder="Type here"
-                            onChangeText={text => setName(text)}
+                            onChangeText={text => setSettings(setName, text)}
                             defaultValue={name}
                         />
                     </View>
@@ -52,6 +67,7 @@ export default function GeneralSettingsScreen({ navigation }) {
                                 value: null,
                                 color: colors.black,
                             }}
+                            value={gender}
                             Icon={() => {
                                 return (
                                     <View style={styles.dropdownIcon}>
@@ -64,7 +80,7 @@ export default function GeneralSettingsScreen({ navigation }) {
                                     </View>
                                 );
                             }}
-                            onValueChange={() => console.log("hi")}
+                            onValueChange={(option) => setSettings(setGender, option)}
                             items={[{ label: 'Feminine', value: 'feminine' }, { label: 'Masculine', value: 'masculine' }, { label: 'Prefer not to say', value: 'unknown' }]}
                         />
 
@@ -75,7 +91,7 @@ export default function GeneralSettingsScreen({ navigation }) {
                             style={styles.input}
                             placeholder="Type here"
                             keyboardType="number-pad"
-                            onChangeText={number => setAge(number)}
+                            onChangeText={number => setSettings(setAge, number)}
                             defaultValue={age}
                         />
                     </View>
@@ -106,7 +122,6 @@ const styles = StyleSheet.create({
         color: colors.black,
     },
     input: {
-        // height: 30,
         padding: 8,
         borderRadius: 17,
         backgroundColor: "#7676801e",
@@ -118,7 +133,7 @@ const styles = StyleSheet.create({
     dropdownIcon: {
         marginRight: 7,
         marginLeft: 7,
-        marginTop: 4.5,
+        marginTop: 5,
     },
 
 });
