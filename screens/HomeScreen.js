@@ -10,6 +10,7 @@ import {
     ScrollView,
     Linking,
     Dimensions,
+    Platform,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,7 +21,7 @@ import MattLogo from "../assets/doggo-circle.png";
 import MattBark from "../assets/doggo-circle-bark.png";
 import NewspaperIcon from "../assets/newspaper-icon.png";
 import ChecklistIcon from "../assets/checklist-icon.png";
-import DumbbellIcon from "../assets/dumbbell-icon.png";
+import MeditateIcon from "../assets/meditate-icon.png";
 import TeaCupIcon from "../assets/tea-cup-icon.png";
 import CogwheelIcon from "../assets/cogwheel-icon.png";
 import colors from "../config/colors";
@@ -100,7 +101,7 @@ export default function HomeScreen({ navigation }) {
                                     style={styles.suggestion}
                                     onPress={() =>
                                         Linking.openURL(
-                                            "instagram://user?username=wearehutt"
+                                            "https://news.google.com/topstories"
                                         )
                                     }
                                 >
@@ -112,18 +113,32 @@ export default function HomeScreen({ navigation }) {
                                         Reading news
                                     </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.suggestion}>
+                                <TouchableOpacity
+                                    style={styles.suggestion}
+                                    onPress={() =>
+                                        Linking.openURL(
+                                            "https://www.calm.com"
+                                        )
+                                    }
+                                >
                                     <Image
                                         style={styles.suggestionIcon}
-                                        source={DumbbellIcon}
+                                        source={MeditateIcon}
                                     />
                                     <Text style={styles.suggestionText}>
-                                        Morning exercise
+                                        Meditate
                                     </Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.suggestionsRow}>
-                                <TouchableOpacity style={styles.suggestion}>
+                                <TouchableOpacity
+                                    style={styles.suggestion}
+                                    onPress={() =>
+                                        Linking.openURL(
+                                            "https://www.google.com/search?client=firefox-b-d&q=breakfast+recipes"
+                                        )
+                                    }
+                                >
                                     <Image
                                         style={styles.suggestionIcon}
                                         source={TeaCupIcon}
@@ -132,7 +147,16 @@ export default function HomeScreen({ navigation }) {
                                         Preparing breakfast
                                     </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.suggestion}>
+                                <TouchableOpacity
+                                    style={styles.suggestion}
+                                    onPress={() => {
+                                        if (Platform.OS === "ios") {
+                                            Linking.openURL("mobilenotes://");
+                                            return;
+                                        }
+                                        Linking.openURL("https://www.rapidtables.com/tools/notepad.html");
+                                    }}
+                                >
                                     <Image
                                         style={styles.suggestionIcon}
                                         source={ChecklistIcon}
