@@ -10,10 +10,10 @@ import {
     selectBedTime,
     selectLunch,
     selectWakeUp,
-    selectDiner,
+    selectDinner,
     setWakeUp,
     setLunch,
-    setDiner,
+    setDinner,
     setBedTime,
 } from "../redux/times";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -83,7 +83,7 @@ export default function EditRoutinesTimesScreen({ navigation }) {
                     <TimeItem action={setLunch} selector={selectLunch}>
                         Lunch
                     </TimeItem>
-                    <TimeItem action={setDiner} selector={selectDiner}>
+                    <TimeItem action={setDinner} selector={selectDinner}>
                         Dinner
                     </TimeItem>
                     <TimeItem action={setBedTime} selector={selectBedTime}>

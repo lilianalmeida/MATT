@@ -50,7 +50,7 @@ function AboutUsScreen({ navigation }) {
                 </Text>
                 <Text style={styles.text}>
                     This app was made with love by three fellow students -
-                    Hannah, Liliana and Carlos - as a project for the course
+                    Hanna, Liliana and Carlos - as a project for the course
                     Mobile Computing: Design and Implementation given in
                     Chalmers University of Technology. Checkout our{" "}
                     {

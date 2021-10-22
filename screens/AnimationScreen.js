@@ -19,7 +19,7 @@ import {
 import {
     selectLunch,
     selectWakeUp,
-    selectDiner,
+    selectDinner,
 } from "../redux/times";
 
 import colors from "../config/colors";
@@ -47,14 +47,14 @@ function AnimationScreen({ navigation }) {
 
     let wakeUpDate = new Date(useSelector(selectWakeUp));
     let lunchDate = new Date(useSelector(selectLunch));
-    let dinnerDate = new Date(useSelector(selectDiner));
-    let wakeUpTime = wakeUpDate.getHours() + ":" + wakeUpDate.getMinutes();
-    let lunchTime = lunchDate.getHours() + ":" + lunchDate.getMinutes();
-    let dinnerTime = dinnerDate.getHours() + ":" + dinnerDate.getMinutes();
-
+    let dinnerDate = new Date(useSelector(selectDinner));
+    let wakeUpTime = ("0" + wakeUpDate.getHours()).slice(-2) + ":" + ("0" + wakeUpDate.getMinutes()).slice(-2);
+    let lunchTime = ("0" + lunchDate.getHours()).slice(-2) + ":" + ("0" + lunchDate.getMinutes()).slice(-2);
+    let dinnerTime = ("0" + dinnerDate.getHours()).slice(-2) + ":" + ("0" + dinnerDate.getMinutes()).slice(-2);
+    
     const setDataAccordingToTime = () => {
         let today = new Date();
-        let timeNow = today.getHours() + ":" + today.getMinutes();
+        let timeNow = ("0" + today.getHours()).slice(-2) + ":" + ("0" + today.getMinutes()).slice(-2);
 
         if (timeNow >= wakeUpTime && timeNow < lunchTime) {
             setWelcomePhrase("Good Morning")

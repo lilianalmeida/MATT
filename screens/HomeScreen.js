@@ -24,7 +24,7 @@ import {
 import {
     selectLunch,
     selectWakeUp,
-    selectDiner,
+    selectDinner,
 } from "../redux/times";
 import MattLogo from "../assets/doggo-circle.png";
 import MattBark from "../assets/doggo-circle-bark.png";
@@ -49,7 +49,7 @@ export default function HomeScreen({ navigation }) {
     let name = useSelector(selectName);
     let wakeUpDate = useSelector(selectWakeUp);
     let lunchDate = useSelector(selectLunch);
-    let dinnerDate = useSelector(selectDiner);
+    let dinnerDate = useSelector(selectDinner);
 
     const barkAnimation = () => {
         setOpacity(1);
@@ -58,16 +58,16 @@ export default function HomeScreen({ navigation }) {
 
     const setDataAccordingToTime = () => {
         let wakeUpTime = new Date(wakeUpDate)
-        wakeUpTime = wakeUpTime.getHours() + ":" + wakeUpTime.getMinutes();
+        wakeUpTime = ("0" + wakeUpTime.getHours()).slice(-2) + ":" + ("0" + wakeUpTime.getMinutes()).slice(-2);
 
         let lunchTime = new Date(lunchDate)
-        lunchTime = lunchTime.getHours() + ":" + lunchTime.getMinutes();
+        lunchTime = ("0" + lunchTime.getHours()).slice(-2) + ":" + ("0" + lunchTime.getMinutes()).slice(-2);
 
         let dinnerTime = new Date(dinnerDate)
-        dinnerTime = dinnerTime.getHours() + ":" + dinnerTime.getMinutes();
+        dinnerTime = ("0" + dinnerTime.getHours()).slice(-2) + ":" + ("0" + dinnerTime.getMinutes()).slice(-2);
 
         let today = new Date();
-        let timeNow = today.getHours() + ":" + today.getMinutes();
+        let timeNow = ("0" + today.getHours()).slice(-2) + ":" + ("0" + today.getMinutes()).slice(-2);
 
         if (timeNow >= wakeUpTime && timeNow < lunchTime) {
             setWelcomePhrase("Good Morning")
