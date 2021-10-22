@@ -16,11 +16,9 @@ At the end of the day, it might just feel like time has slipped away, but many o
 ## Technologies
 Our app was developed with React Native which allows code developing for both Android and iOS using only Javascript without worrying about any native code. In order to accelerate our job we worked with Expo. Expo is a framework for React Native applications that aids developing, building and deploying for every mobile operating system. We also make use of Redux to keep a centralized state of the application where we save the user personalized settings.
 
-</br>
 
 ----
 
-</br>
 
 ## Installation
 
