@@ -78,14 +78,15 @@ export default function SettingsScreen({ navigation }) {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.settingButton}>
+                    <TouchableOpacity
+                        style={styles.settingButton}
+                        onPress={() => navigation.navigate("AboutUs")}
+                    >
                         <View>
-                            <Text style={styles.settingTitle}>
-                                About Us
+                            <Text style={styles.settingTitle}>About Us</Text>
+                            <Text style={styles.settingDescription}>
+                                Get to know the makers
                             </Text>
-                            {/* <Text style={styles.settingDescription}>
-                                Read a little about us
-                            </Text> */}
                         </View>
                     </TouchableOpacity>
                 </View>

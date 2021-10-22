@@ -28,7 +28,7 @@ At the end of the day, it might just feel like time has slipped away, but many o
 
 ## Remaining Tasks
 
-- [ ] Make About Us screen
+- [ ] Documentation of tech stack + wtf
 - [ ] Change the informaion showed considering the time of the day
 - [ ] Make video
 - [ ] Finish Portfolio page

@@ -7,7 +7,8 @@ import GeneralSettingsScreen from "../screens/GeneralSettingsScreen";
 import AnimationScreen from "../screens/AnimationScreen";
 import EditRoutinesTimesScreen from "../screens/EditRoutinesTimesScreen";
 import EditRoutineScreen from "../screens/EditRoutineScreen";
-import AddHabitScreen from '../screens/AddHabitScreen';
+import AddHabitScreen from "../screens/AddHabitScreen";
+import AboutUsScreen from "../screens/AboutUsScreen";
 import colors from "../config/colors";
 
 const MainStack = createNativeStackNavigator();
@@ -37,9 +38,16 @@ export default function MainNavigator() {
                 name="EditRoutinesTimes"
                 component={EditRoutinesTimesScreen}
             />
-            <MainStack.Screen name="EditRoutine" component={EditRoutineScreen} />
+            <MainStack.Screen
+                name="EditRoutine"
+                component={EditRoutineScreen}
+            />
             <MainStack.Screen name="AddHabit" component={AddHabitScreen} />
-            <MainStack.Screen name="GeneralSettings" component={GeneralSettingsScreen} />
+            <MainStack.Screen
+                name="GeneralSettings"
+                component={GeneralSettingsScreen}
+            />
+            <MainStack.Screen name="AboutUs" component={AboutUsScreen} />
         </MainStack.Navigator>
     );
 }
