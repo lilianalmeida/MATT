@@ -4,11 +4,10 @@
     "slug": "MATT",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/android-icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "contain"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,13 +16,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "1.0",
+      "bundleIdentifier": "pt.matt",
+      "supportsTablet": true,
+      "icon": "./assets/ios-icon.png"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "icon": "./assets/android-icon.png",
+      "package": "pt.matt",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
