@@ -111,7 +111,7 @@ function AnimationScreen({ navigation }) {
                     ]}
                 >
                     <View style={styles.header}></View>
-                    <Text style={styles.welcomeText}>Good Evening, {name}!</Text>
+                    <Text style={styles.welcomeText}>{welcomePhrase}, {name}!</Text>
                 </Animated.View>
                 <Animated.Image
                     style={[
@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
         fontFamily: "Dosis-SemiBold",
         alignSelf: "center",
         marginTop: 62,
+        textAlign: 'center'
     },
 });
 

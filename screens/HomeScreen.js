@@ -47,12 +47,9 @@ export default function HomeScreen({ navigation }) {
     const [questionPhrase, setQuestionPhrase] = useState("")
 
     let name = useSelector(selectName);
-    let wakeUpDate = new Date(useSelector(selectWakeUp));
-    let lunchDate = new Date(useSelector(selectLunch));
-    let dinnerDate = new Date(useSelector(selectDiner));
-    let wakeUpTime = wakeUpDate.getHours() + ":" + wakeUpDate.getMinutes();
-    let lunchTime = lunchDate.getHours() + ":" + lunchDate.getMinutes();
-    let dinnerTime = dinnerDate.getHours() + ":" + dinnerDate.getMinutes();
+    let wakeUpDate = useSelector(selectWakeUp);
+    let lunchDate = useSelector(selectLunch);
+    let dinnerDate = useSelector(selectDiner);
 
     const barkAnimation = () => {
         setOpacity(1);
@@ -60,6 +57,15 @@ export default function HomeScreen({ navigation }) {
     };
 
     const setDataAccordingToTime = () => {
+        let wakeUpTime = new Date(wakeUpDate)
+        wakeUpTime = wakeUpTime.getHours() + ":" + wakeUpTime.getMinutes();
+
+        let lunchTime = new Date(lunchDate)
+        lunchTime = lunchTime.getHours() + ":" + lunchTime.getMinutes();
+
+        let dinnerTime = new Date(dinnerDate)
+        dinnerTime = dinnerTime.getHours() + ":" + dinnerTime.getMinutes();
+
         let today = new Date();
         let timeNow = today.getHours() + ":" + today.getMinutes();
 
@@ -78,7 +84,7 @@ export default function HomeScreen({ navigation }) {
     useEffect(() => {
         setTimeout(barkAnimation, barkingInterval);
         setDataAccordingToTime();
-    }, []);
+    }, [wakeUpDate, lunchDate, dinnerDate]);
 
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -278,6 +284,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         paddingTop: 40,
         paddingBottom: 10,
+        textAlign: 'center'
     },
     descriptionText: {
         color: "white",
