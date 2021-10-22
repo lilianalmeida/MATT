@@ -19,14 +19,19 @@ Our app was developed with React Native which allows code development for both A
 
 ----
 
-
 ## Installation
+
+You can download the **Android** apk [here](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40cajoalbuquerque/MATT-7d09feb6c49d4e75adb2e5dbdece4c1d-signed.apk). Afterwards use the file manager to execute the apk. You will have to give permission to install from unknown sources.
+
+
+## Development
+### Dependenncies
 
 - Install [Node](https://nodejs.org/en/download/)
 - Run `npm install -g expo-cli` to install Expo CLI
 - Run `npm install` to install all needed packages
 
-## Run app
+### Run app
 
 - Run `expo start` or `npm start` to start Expo
 - On your device read the QRCode presented in [localhost:19002](http://localhost:19002/)
